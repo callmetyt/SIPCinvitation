@@ -15,11 +15,6 @@ const routes = [
     component: () => import("../views/arrange.vue"),
   },
   {
-    path: "/question",
-    name: "question",
-    component: () => import("../views/question.vue"),
-  },
-  {
     path: "/info",
     name: "info",
     component: () => import("../views/info.vue"),
@@ -33,7 +28,7 @@ const router = new VueRouter({
 });
 
 router.afterEach((to, from) => {
-  let speed = 35;
+  let speed = 30;
   let timer = setInterval(() => {
     document.documentElement.scrollTo(
       0,
