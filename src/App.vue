@@ -26,6 +26,7 @@ export default {
       scrollY: true,
       probeType: 2,
       mouseWheel: true,
+      click: true,
     });
     const posCheck = (pos) => {
       if (pos.y < -250) {
