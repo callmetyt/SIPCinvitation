@@ -1,11 +1,27 @@
 <template>
   <div id="info">
     <div class="base">
+      <p class="head">亲爱的学长学姐：</p>
+      <p class="content">
+        我们正在完善115成员信息系统，现需要收集大家的个人信息。下方的“扩展信息”为选填项，我们会在SIPC十周年生日之际，以推文的形式在学院公众号推送历届115成员的风采展示。推文需要您上传一张近期工作照或最能代表您的一张图片。“扩展信息”中的部分选项可能会涉及到您的个人隐私，您可以选择性填写，感谢学长学姐的配合！
+      </p>
       <header>基本信息</header>
       <Input v-model="infos.name" placeholder="姓名" />
-      <Input v-model="infos.grade" placeholder="年级" />
-      <Input v-model="infos.sex" placeholder="性别" />
-      <Input v-model="infos.duty" placeholder="中心职务" />
+      <Select v-model="infos.grade" placeholder="年级">
+        <Option v-for="item in gradeList" :value="item" :key="item">{{
+          item
+        }}</Option>
+      </Select>
+      <Select v-model="infos.sex" placeholder="性别">
+        <Option v-for="item in sexList" :value="item" :key="item">{{
+          item
+        }}</Option>
+      </Select>
+      <Select v-model="infos.duty" placeholder="中心职务">
+        <Option v-for="item in dutyList" :value="item" :key="item">{{
+          item
+        }}</Option>
+      </Select>
       <Input v-model="infos.phone" placeholder="电话号码" />
       <Input v-model="infos.email" placeholder="邮箱" />
       <Input v-model="infos.classes" placeholder="专业班级" />
@@ -66,6 +82,21 @@ export default {
         achievement: "",
       },
       file: [],
+      sexList: ["男", "女"],
+      gradeList: [
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+      ],
+      dutyList: ["主任", "副主任", "部长", "干事"],
     };
   },
   mounted() {},
@@ -128,17 +159,33 @@ export default {
 <style scoped lang="scss">
 #info {
   padding: 30px;
+  width: 80%;
   .base {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    .head {
+      align-self: flex-start;
+      font-size: 22px;
+      font-weight: bold;
+      letter-spacing: 5px;
+    }
+    .content {
+      text-indent: 2em;
+      margin: 20px 0;
+      letter-spacing: 1px;
+    }
     header {
       font-size: 22px;
       font-weight: bold;
       letter-spacing: 5px;
     }
     .ivu-input-wrapper {
+      margin-top: 10px;
+      width: 80%;
+    }
+    .ivu-select {
       margin-top: 10px;
       width: 80%;
     }
@@ -155,6 +202,10 @@ export default {
       letter-spacing: 5px;
     }
     .ivu-input-wrapper {
+      margin-top: 10px;
+      width: 80%;
+    }
+    .ivu-select {
       margin-top: 10px;
       width: 80%;
     }

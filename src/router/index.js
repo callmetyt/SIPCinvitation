@@ -27,23 +27,4 @@ const router = new VueRouter({
   routes,
 });
 
-router.afterEach((to, from) => {
-  let speed = 30;
-  let timer = setInterval(() => {
-    document.documentElement.scrollTo(
-      0,
-      (document.documentElement.scrollTop ||
-        window.pageYOffset ||
-        document.body.scrollTop) - speed
-    );
-    if (
-      (document.documentElement.scrollTop ||
-        window.pageYOffset ||
-        document.body.scrollTop) === 0
-    ) {
-      clearInterval(timer);
-    }
-  }, 15);
-});
-
 export default router;

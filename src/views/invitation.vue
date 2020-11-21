@@ -9,12 +9,12 @@
       <div class="mainTitle">2020 学生创新实践中心</div>
       <div class="subTitle">十周年邀请函</div>
     </article>
-    <p>亲爱的SIPCer:</p>
+    <p>亲爱的SIPCer xxx:</p>
     <p>
-      “十年一唤，怎能不来？”从2010到2020年，十年相伴，共同成长。我们云趋鹜赴，为了一句承诺，更为了纪念那段曾经共同拼搏的难忘时光。在十周年生日到来之际，期待您能参与SIPC的线上（线下）庆生，回归这个温暖的大家庭！
+      十年相伴，共同成长。我们云趋鹜赴，为了一句承诺，更为了纪念那段曾经共同拼搏的难忘时光。在十周年生日到来之际，期待您能参与SIPC的交流分享会，回归这个温暖的大家庭!
     </p>
     <p>
-      本次我们准备了线上、线下两套庆生方案。若受疫情影响学校暂停对外开放，下面各环节将会以线上会议的形式开展。待学校做出综合评估后，我们会第一时间通知您10周年生日的具体举办方式，感谢您的理解！
+      受目前疫情形势影响，我们将会在明年春季举行较为盛大、完整的10周年庆典，本次仅进行SIPC大家庭的经验分享交流会，感谢您的理解！
     </p>
   </div>
 </template>
@@ -38,7 +38,7 @@ export default {
 }
 #invitation {
   // display: flex;
-  border: solid 1px yellow;
+  // border: solid 1px yellow;
   height: 800px;
   position: relative;
 }
@@ -55,6 +55,7 @@ export default {
   //none 原始大小
   //fill 拉伸 填充满
   object-fit: cover;
+  border-radius: 20px;
 }
 .font {
   // display: flex;
@@ -138,12 +139,12 @@ p {
 
 p:nth-of-type(2) {
   top: 325px;
-  text-indent: 35px;
+  text-indent: 2em;
 }
 
 p:nth-of-type(3) {
-  top: 500px;
-  text-indent: 35px;
+  top: 480px;
+  text-indent: 2em;
 }
 
 @media screen and (max-width: 550px) {
@@ -159,18 +160,19 @@ p:nth-of-type(3) {
     left: 30px;
   }
   .mainTitle {
-    height: 100px;
+    font-size: 18px;
+    height: 70px;
   }
   p {
     width: 240px;
     left: 30px;
-    top: 385px;
+    top: 400px;
   }
   p:nth-of-type(2) {
-    top: 410px;
+    top: 425px;
   }
   p:nth-of-type(3) {
-    top: 585px;
+    top: 600px;
   }
 }
 </style>

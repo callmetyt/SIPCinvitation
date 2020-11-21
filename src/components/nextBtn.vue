@@ -22,16 +22,17 @@ export default {
   data() {
     return {
       route: ["invitation", "arrange", "info"],
-      show: false,
     };
   },
   methods: {
     next() {
+      this.$bus.$emit("changeRoute");
       this.$router.push({
         name: this.route[this.step + 1],
       });
     },
     prev() {
+      this.$bus.$emit("changeRoute");
       this.$router.push({
         name: this.route[this.step - 1],
       });
@@ -44,37 +45,9 @@ export default {
     step() {
       return this.route.indexOf(this.$route.name);
     },
-    check() {
-      return _.throttle(() => {
-        let docu = document.documentElement;
-        // console.log(
-        //   docu.scrollTop.toFixed(2),
-        //   docu.clientHeight,
-        //   docu.scrollHeight,
-        //   Math.abs(docu.scrollTop + docu.clientHeight - docu.scrollHeight) < 1
-        // );
-        if (
-          Math.abs(
-            (docu.scrollTop || window.pageYOffset || document.body.scrollTop) +
-              docu.clientHeight -
-              docu.scrollHeight
-          ) < 1
-        ) {
-          this.show = true;
-        } else {
-          this.show = false;
-        }
-      }, 250);
+    show() {
+      return this.$store.state.show;
     },
-  },
-  created() {
-    window.addEventListener("scroll", this.check);
-  },
-  updated() {
-    this.check();
-  },
-  beforeDestroy() {
-    window.removeEventListener("scroll", this.check);
   },
 };
 </script>

@@ -1,11 +1,13 @@
 <template>
   <div id="app">
-    <img src="./assets/back.jpg" class="background" />
-    <div class="warp">
-      <transition name="page" mode="out-in">
-        <router-view />
-      </transition>
+    <div class="container">
+      <div class="warp">
+        <transition name="page" mode="out-in">
+          <router-view />
+        </transition>
+      </div>
     </div>
+    <img src="./assets/sky1.jpg" class="background" />
     <next-btn />
   </div>
 </template>
@@ -18,6 +20,30 @@ export default {
   component: {
     nextBtn,
   },
+  mounted() {
+    //BetterScroll
+    const bs = new this.BScroll("#app", {
+      scrollY: true,
+      probeType: 2,
+      mouseWheel: true,
+    });
+    const posCheck = (pos) => {
+      if (pos.y < -250) {
+        this.$store.commit("showBtn");
+      } else if (pos.y > -250) {
+        this.$store.commit("hideBtn");
+      }
+    };
+    //touch滑动
+    bs.on("scroll", (pos) => posCheck(pos));
+    //滚轮滑动
+    bs.on("mousewheelMove", (pos) => posCheck(pos));
+    //切换路由的监听
+    this.$bus.$on("changeRoute", () => {
+      bs.scrollTo(0, 0, 750);
+      this.$store.commit("hideBtn");
+    });
+  },
 };
 </script>
 
@@ -27,6 +53,8 @@ body {
   #app {
     display: flex;
     justify-content: center;
+    height: 100vh;
+    transform-style: preserve-3d;
     .background {
       position: fixed;
       height: 100%;
@@ -34,23 +62,33 @@ body {
       z-index: -1;
       object-fit: cover;
     }
-    .warp {
-      height: 800px;
-      width: 500px;
-      flex-shrink: 0;
-      border-radius: 20px;
-      background-color: rgba(255, 255, 255, 0.95);
-      box-shadow: 0 5px 10px 0 rgb(61, 61, 61);
-      margin: 100px 0;
+    .container {
+      height: 1200px;
+      padding: 100px 0;
+      .warp {
+        height: max-content;
+        width: 500px;
+        flex-shrink: 0;
+        border-radius: 20px;
+        background-color: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 5px 10px 0 rgb(61, 61, 61);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
     @media screen and (max-width: 550px) {
-      .warp {
-        width: 300px;
+      .container {
+        .warp {
+          width: 300px;
+        }
       }
     }
     #nextBtn {
       position: fixed;
-      bottom: 0px;
+      bottom: 30px;
+      z-index: 9999;
+      transform: translateZ(1px);
     }
     .page-enter-active {
       animation-name: fadeIn;
