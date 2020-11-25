@@ -7,10 +7,11 @@
     <div class="content">线上会议</div>
     <header>流程安排</header>
     <Steps :current="stepCurrent" direction="vertical">
-      <Step title="流程一" content="学长代表经验分享会"></Step>
-      <Step title="流程二" content="重温天理校园"></Step>
+      <Step title="流程一" content="总结大会"></Step>
+      <Step title="流程二" content="学长代表经验分享会"></Step>
+      <Step title="流程三" content="重温115&天理校园"></Step>
       <Step
-        title="流程三"
+        title="流程四"
         content="历届中心前辈与现任115成员的方向分享会"
       ></Step>
     </Steps>
@@ -28,7 +29,7 @@ export default {
   },
   mounted() {
     this.timer = setInterval(() => {
-      if (this.stepCurrent == 2) {
+      if (this.stepCurrent == 3) {
         this.stepCurrent = 0;
       } else {
         this.stepCurrent++;

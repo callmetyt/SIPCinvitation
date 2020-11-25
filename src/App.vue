@@ -27,6 +27,7 @@ export default {
       probeType: 2,
       mouseWheel: true,
       click: true,
+      preventDefault: true,
     });
     const posCheck = (pos) => {
       if (pos.y < -250) {
@@ -64,7 +65,7 @@ body {
       object-fit: cover;
     }
     .container {
-      height: 1200px;
+      height: 1400px;
       padding: 100px 0;
       .warp {
         height: max-content;

@@ -1,12 +1,12 @@
 <template>
   <div id="nextBtn">
     <transition name="btn2">
-      <div class="btnWarp" @click="prev" v-if="step > 0 && step <= 2 && show">
+      <div class="btnWarp" @click="prev" v-if="step > 0 && step <= 3 && show">
         <styleBtn :text="'上一页'"></styleBtn>
       </div>
     </transition>
     <transition name="btn">
-      <div class="btnWarp" @click="next" v-if="step < 2 && show">
+      <div class="btnWarp" @click="next" v-if="step < 3 && show">
         <styleBtn :text="'下一页'"></styleBtn>
       </div>
     </transition>
@@ -21,7 +21,7 @@ export default {
   name: "nextBtn",
   data() {
     return {
-      route: ["invitation", "arrange", "info"],
+      route: ["invitation", "arrange", "info", "end"],
     };
   },
   methods: {
@@ -75,6 +75,7 @@ export default {
     display: block;
     .btnWarp {
       margin-bottom: 10px;
+      cursor: pointer;
     }
   }
 }
