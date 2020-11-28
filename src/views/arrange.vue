@@ -29,8 +29,8 @@ export default {
   },
   mounted() {
     this.timer = setInterval(() => {
-      if (this.stepCurrent == 3) {
-        this.stepCurrent = 0;
+      if (this.stepCurrent == 4) {
+        clearInterval(this.timer);
       } else {
         this.stepCurrent++;
       }

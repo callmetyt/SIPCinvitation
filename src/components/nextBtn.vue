@@ -1,27 +1,26 @@
 <template>
   <div id="nextBtn">
     <transition name="btn2">
-      <div class="btnWarp" @click="prev" v-if="step > 0 && step <= 3 && show">
-        <styleBtn :text="'上一页'"></styleBtn>
+      <div class="btnWarp" @click="prev" v-if="step > 0 && step <= 2 && show">
+        <styleBtn :text="'上一页'" :leftDir="true"></styleBtn>
       </div>
     </transition>
     <transition name="btn">
-      <div class="btnWarp" @click="next" v-if="step < 3 && show">
-        <styleBtn :text="'下一页'"></styleBtn>
+      <div class="btnWarp" @click="next" v-if="step < 2 && show">
+        <styleBtn :text="'下一页'" :leftDir="false"></styleBtn>
       </div>
     </transition>
   </div>
 </template>
 
 <script>
-import _ from "lodash";
 import styleBtn from "./styleBtn";
 
 export default {
   name: "nextBtn",
   data() {
     return {
-      route: ["invitation", "arrange", "info", "end"],
+      route: ["invitation", "arrange", "info"],
     };
   },
   methods: {

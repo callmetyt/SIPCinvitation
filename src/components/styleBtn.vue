@@ -3,7 +3,7 @@
     <div id="container">
       <button class="learn-more">
         <span class="circle" aria-hidden="true">
-          <span class="icon arrow"></span>
+          <span class="icon arrow" :class="leftDir ? 'left' : ''"></span>
         </span>
         <span class="button-text">{{ text }}</span>
       </button>
@@ -19,6 +19,7 @@ export default {
   },
   props: {
     text: String,
+    leftDir: Boolean,
   },
   mounted() {},
   methods: {},
@@ -108,6 +109,13 @@ button {
             border-top: 0.125rem solid #fff;
             border-right: 0.125rem solid #fff;
             transform: rotate(45deg);
+          }
+        }
+        &.left {
+          left: 1.025rem;
+          &::before {
+            transform: rotate(-135deg);
+            right: 0.425rem;
           }
         }
       }

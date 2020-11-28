@@ -1,11 +1,12 @@
 <template>
   <div id="app">
-    <div class="container">
+    <div :class="{ container: true, super: containerClass }">
       <div class="warp">
         <transition name="page" mode="out-in">
           <router-view />
         </transition>
       </div>
+      <div class="tip" v-if="!containerClass">向下滑动,解锁下一章内容</div>
     </div>
     <img src="./assets/sky1.jpg" class="background" />
     <next-btn />
@@ -16,6 +17,11 @@
 import nextBtn from "./components/nextBtn";
 
 export default {
+  computed: {
+    containerClass() {
+      return this.$route.name == "info";
+    },
+  },
   components: { nextBtn },
   component: {
     nextBtn,
@@ -30,10 +36,18 @@ export default {
       preventDefault: true,
     });
     const posCheck = (pos) => {
-      if (pos.y < -250) {
-        this.$store.commit("showBtn");
-      } else if (pos.y > -250) {
-        this.$store.commit("hideBtn");
+      if (this.$route.name == "info") {
+        if (pos.y < -900) {
+          this.$store.commit("showBtn");
+        } else {
+          this.$store.commit("hideBtn");
+        }
+      } else {
+        if (pos.y < -250) {
+          this.$store.commit("showBtn");
+        } else {
+          this.$store.commit("hideBtn");
+        }
       }
     };
     //touch滑动
@@ -45,6 +59,9 @@ export default {
       bs.scrollTo(0, 0, 750);
       this.$store.commit("hideBtn");
     });
+    console.log(
+      "亲爱的学长学姐，由于工期较紧，邀请函网页没有从安全角度做充分的设计。此次信息采集的数据对日后活动开展十分重要，还请大家对我们的服务器手下留情₍ ᐢ. ̫ .ᐢ ₎ "
+    );
   },
 };
 </script>
@@ -65,7 +82,7 @@ body {
       object-fit: cover;
     }
     .container {
-      height: 1400px;
+      height: 1800px;
       padding: 100px 0;
       .warp {
         height: max-content;
@@ -79,8 +96,16 @@ body {
         justify-content: center;
       }
     }
+    .tip {
+      position: relative;
+      top: 30px;
+      margin: auto;
+      text-align: center;
+      letter-spacing: 3px;
+    }
     @media screen and (max-width: 550px) {
       .container {
+        height: 2200px;
         .warp {
           width: 300px;
         }

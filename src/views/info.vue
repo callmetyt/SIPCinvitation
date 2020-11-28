@@ -9,7 +9,7 @@
         ⽚（可以是常⽤头像哦）。“扩展信息”中的部分选项可能会涉及到您的个⼈隐私，您可以选择性填写，感谢学⻓学姐的
         配合！
       </p>
-      <header>基本信息</header>
+      <header>基本信息（必填）</header>
       <Input v-model="infos.name" placeholder="姓名" />
       <Select v-model="infos.grade" placeholder="年级">
         <Option v-for="item in gradeList" :value="item" :key="item">{{
@@ -39,7 +39,7 @@
       </Select>
     </div>
     <div class="more">
-      <header>扩展信息</header>
+      <header>扩展信息（选填）</header>
       <Input v-model="infos.company" placeholder="就职公司" />
       <Input v-model="infos.workplace" placeholder="工作地点" />
       <Select v-model="infos.careerDirection" placeholder="职业方向">
@@ -51,13 +51,13 @@
       <Input
         v-model="infos.message"
         type="textarea"
-        :autosize="{ minRows: 1, maxRows: 3 }"
+        :autosize="{ minRows: 3, maxRows: 3 }"
         placeholder="对中心寄语"
       />
       <Input
         v-model="infos.achievement"
         type="textarea"
-        :autosize="{ minRows: 1, maxRows: 3 }"
+        :autosize="{ minRows: 3, maxRows: 3 }"
         placeholder="科研成果介绍"
       />
     </div>
@@ -70,6 +70,13 @@
     >
       <Button>照片上传</Button>
     </Upload>
+    <header class="que">您是否有时间参加本次线上庆⽣活动</header>
+    <RadioGroup v-model="infos.hasTime">
+      <Radio label="有时间"></Radio>
+      <Radio label="看情况"></Radio>
+      <Radio label="没时间"></Radio>
+    </RadioGroup>
+    <img src="../../public/code.jpg" alt="文件丢失" />
     <Button type="success" @click.prevent="submit">提交</Button>
   </div>
 </template>
@@ -96,6 +103,7 @@ export default {
         jobTitle: "",
         message: "",
         achievement: "",
+        hasTime: "",
       },
       file: [],
       sexList: ["男", "女"],
@@ -133,6 +141,7 @@ export default {
           "phone",
           "email",
           "classes",
+          "hasTime",
         ];
         if (this.infos.hasOwnProperty(key)) {
           if (
@@ -173,6 +182,7 @@ export default {
                 this.infos[key] = "";
               }
             }
+            this.removeFile();
           } else {
             this.$Message.error({
               content: res.data.msg,
@@ -278,6 +288,25 @@ export default {
   .ivu-btn {
     margin: 20px auto 0 auto;
     display: block;
+  }
+  .que {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px 0;
+  }
+  .ivu-radio-group {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+  }
+  img {
+    height: 200px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+  }
+  /deep/ .ivu-select-dropdown {
+    max-height: none;
   }
 }
 </style>
