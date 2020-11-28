@@ -25,16 +25,16 @@ export default {
   },
   methods: {
     next() {
-      this.$bus.$emit("changeRoute");
       this.$router.push({
         name: this.route[this.step + 1],
       });
+      this.$bus.$emit("changeRoute");
     },
     prev() {
-      this.$bus.$emit("changeRoute");
       this.$router.push({
         name: this.route[this.step - 1],
       });
+      this.$bus.$emit("changeRoute");
     },
   },
   components: {

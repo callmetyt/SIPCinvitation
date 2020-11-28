@@ -1,12 +1,14 @@
 <template>
   <div id="app">
-    <div :class="{ container: true, super: containerClass }">
+    <div
+      :class="{ container: true, super: containerClass, second: secondCheck }"
+    >
       <div class="warp">
         <transition name="page" mode="out-in">
           <router-view />
         </transition>
       </div>
-      <div class="tip" v-if="!containerClass">向下滑动,解锁下一章内容</div>
+      <div class="tip">向下滑动，翻页按钮将会浮现</div>
     </div>
     <img src="./assets/sky1.jpg" class="background" />
     <next-btn />
@@ -20,6 +22,9 @@ export default {
   computed: {
     containerClass() {
       return this.$route.name == "info";
+    },
+    secondCheck() {
+      return this.$route.name == "arrange";
     },
   },
   components: { nextBtn },
@@ -36,14 +41,21 @@ export default {
       preventDefault: true,
     });
     const posCheck = (pos) => {
+      // console.log(pos);
       if (this.$route.name == "info") {
         if (pos.y < -900) {
           this.$store.commit("showBtn");
         } else {
           this.$store.commit("hideBtn");
         }
+      } else if (this.$route.name == "arrange") {
+        if (pos.y < -180) {
+          this.$store.commit("showBtn");
+        } else {
+          this.$store.commit("hideBtn");
+        }
       } else {
-        if (pos.y < -250) {
+        if (pos.y < -300) {
           this.$store.commit("showBtn");
         } else {
           this.$store.commit("hideBtn");
@@ -56,6 +68,9 @@ export default {
     bs.on("mousewheelMove", (pos) => posCheck(pos));
     //切换路由的监听
     this.$bus.$on("changeRoute", () => {
+      setTimeout(() => {
+        bs.refresh();
+      }, 100);
       bs.scrollTo(0, 0, 750);
       this.$store.commit("hideBtn");
     });
@@ -82,7 +97,7 @@ body {
       object-fit: cover;
     }
     .container {
-      height: 1800px;
+      height: 1050px;
       padding: 100px 0;
       .warp {
         height: max-content;
@@ -96,6 +111,12 @@ body {
         justify-content: center;
       }
     }
+    .second {
+      height: 900px;
+    }
+    .super {
+      height: 1700px;
+    }
     .tip {
       position: relative;
       top: 30px;
@@ -105,10 +126,16 @@ body {
     }
     @media screen and (max-width: 550px) {
       .container {
-        height: 2200px;
+        height: 1050px;
         .warp {
           width: 300px;
         }
+      }
+      .second {
+        height: 1030px;
+      }
+      .super {
+        height: 2000px;
       }
     }
     #nextBtn {
